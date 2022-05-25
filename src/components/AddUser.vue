@@ -196,7 +196,7 @@ export default {
 
       // this.$refs.observer.validate();
 
-      fetch("http://localhost:3000/users", {
+      fetch("https://ftc-awards-server-mysql.herokuapp.com/users", {
         method: "post",
         body: JSON.stringify(requisicao),
         headers: {
