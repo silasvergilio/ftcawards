@@ -61,7 +61,7 @@ export default {
   created() {
     var BASE_URI = location.hostname;
 
-    fetch("http://" + BASE_URI + ":3000/teams",{credentials: 'include'})
+    fetch("https://ftc-awards-server-mysql.herokuapp.com/teams",{credentials: 'include'})
       .then((response) => response.json())
       .then((json) => {
         this.times = json;
