@@ -59,7 +59,6 @@ export default {
   },
 
   created() {
-    var BASE_URI = location.hostname;
 
     fetch("https://ftc-awards-server-mysql.herokuapp.com/teams",{credentials: 'include'})
       .then((response) => response.json())
