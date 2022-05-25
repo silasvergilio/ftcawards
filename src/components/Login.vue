@@ -129,8 +129,8 @@ export default {
       };
       this.loader = true;
       /* eslint-disable*/
-      fetch("http://localhost:3000/users/login", {
-        //credentials: "include",
+      fetch("https://ftc-awards-server-mysql.herokuapp.com/users/login", {
+        credentials: "include",
         method: "post",
         body: JSON.stringify(requisicao),
         headers: {
