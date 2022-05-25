@@ -1,0 +1,17 @@
+{
+  "name": "apitimes",
+  "version": "1.0.0",
+  "description": "API para requisitar e inserir times no sistema de um torneio FTC",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Silas dos Santos Vergilio",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "expresss": "0.0.0",
+    "mongodb": "^3.5.2"
+  }
+}
