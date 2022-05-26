@@ -25,6 +25,18 @@
       <v-toolbar-title v-if="this.$store.state.user" class="user-title">
         {{ this.$store.state.user.fullName }}
       </v-toolbar-title>
+
+
+      <v-btn
+      v-if="this.$store.state.user"
+        :disabled="invalid"
+        color="#1E5AA8"
+        depressed
+        elevation="5"
+        outlined
+      >
+        Logout
+      </v-btn>
     </v-app-bar>
 
     <v-content>
@@ -98,13 +110,12 @@ export default {
       if (!this.$store.state.user) {
         if (this.menuItens.indexOf(this.menuItens[0] === -1))
           allowedMenuItems.push(this.menuItens[0]);
-          allowedMenuItems.push(this.menuItens[1]);
+        allowedMenuItems.push(this.menuItens[1]);
       }
       this.menuItens.forEach((menuItem) => {
         if (this.$store.state.user) {
-          if(menuItem.permission.includes(this.$store.state.user.permission))
-          {
-            allowedMenuItems.push(menuItem)
+          if (menuItem.permission.includes(this.$store.state.user.permission)) {
+            allowedMenuItems.push(menuItem);
           }
         }
       });
