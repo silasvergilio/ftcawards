@@ -60,8 +60,9 @@ export default {
 
   methods: {
     logout() {
+      this.$router.push("/login");
       this.$store.commit("updateUser", null);
-      this.$router.push("/listTeams");
+      
     },
   },
 
