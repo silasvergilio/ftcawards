@@ -61,7 +61,7 @@ export default {
   methods: {
     logout() {
       this.$store.commit("updateUser", null);
-     // this.$router.push("/listTeams");
+      this.$router.push("/listTeams");
     },
   },
 
