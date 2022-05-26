@@ -52,8 +52,9 @@
             >
               Premiar
             </v-btn>
-
+          <br>
             <v-btn
+            v-if="this.$store.state.user.permission == 'Administrador'"
               color="#F9A825"
               text
               @click="
