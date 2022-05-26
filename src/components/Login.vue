@@ -141,12 +141,10 @@ export default {
       })
         .then((response) => {
           this.loader = false;
-          console.log(response);
           return response.json();
         })
         .then((res) => {
           this.loader = false;
-          console.log(res);
           if (res.status == "success") {
             /* eslint-disable*/
             this.$store.commit("updateUser", res.user);
@@ -155,7 +153,6 @@ export default {
         })
         .catch((err) => {
           /* eslint-disable*/
-          console.log(err);
         });
       this.userName = "";
       this.password = "";

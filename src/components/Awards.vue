@@ -52,6 +52,17 @@
             >
               Premiar
             </v-btn>
+
+            <v-btn
+              color="#F9A825"
+              text
+              @click="
+                dialog = false;
+                deleteAward();
+              "
+            >
+              Deletar
+            </v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -174,8 +185,6 @@ export default {
     draggable,
   },
 
- 
-
   data: () => ({
     itemsPerPage: 5,
 
@@ -217,16 +226,63 @@ export default {
       alert(msg);
     },
 
-    deleteIndication()
-    {
+    delteAward(){
+
+      let requisicao = {
+          id: this.items[this.awardIndex].teams[this.index].Teams_idTime,
+        };
+
+    var uri = "";
+         switch (this.items[this.awardIndex].name) {
+          case "Pensamento Criativo":
+            uri =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo";
+            break;
+          case "Conexão":
+            uri =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/conexao";
+            break;
+          case "Inovação":
+            uri =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao";
+            break;
+          case "Motivação":
+            uri =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao";
+            break;
+          case "Design":
+            uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/design";
+            break;
+          case "Controle":
+            uri =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
+            break;
+          default:
+            break;
+        }
+      
+
+      fetch(uri, {
+        method: "DELETE",
+        body: JSON.stringify(requisicao),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
 
     },
 
-     alreadyAwarded(teamValue, awardIndex) {
+    
+
+    alreadyAwarded(teamValue, awardIndex) {
       for (var i = 0; i < this.items.length; i++) {
         if (i == awardIndex) continue;
         for (var k = 0; k < this.items[i].teams.length; k++) {
-          if (this.items[i].teams[k].value == teamValue && this.items[i].teams[k].premiado) return true;
+          if (
+            this.items[i].teams[k].value == teamValue &&
+            this.items[i].teams[k].premiado
+          )
+            return true;
         }
       }
       return false;
@@ -310,27 +366,31 @@ export default {
           id: this.items[this.awardIndex].teams[this.index].Teams_idTime,
         };
         /* eslint-disable*/
-        console.log(requisicao);
         var uri = "";
 
         switch (this.items[this.awardIndex].name) {
           case "Pensamento Criativo":
-            uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo";
+            uri =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo";
             break;
           case "Conexão":
-            uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/conexao";
+            uri =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/conexao";
             break;
           case "Inovação":
-            uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao";
+            uri =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao";
             break;
           case "Motivação":
-            uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao";
+            uri =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao";
             break;
           case "Design":
             uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/design";
             break;
           case "Controle":
-            uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
+            uri =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
             break;
           default:
             break;
@@ -348,12 +408,12 @@ export default {
     },
   },
   created() {
-
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo")
+    fetch(
+      "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo"
+    )
       .then((response) => response.json())
       .then((json) => {
         /* eslint-disable*/
-        console.log(json);
         this.items[0].teams = json;
         this.items[0].teams.sort(function (a, b) {
           return a.position - b.position;

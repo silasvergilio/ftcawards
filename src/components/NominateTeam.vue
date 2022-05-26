@@ -155,7 +155,6 @@ export default {
       .then((response) => response.json())
       .then((json) => {
         this.times = json;
-        // console.log(this.times);
       });
   },
 };
