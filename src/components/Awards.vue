@@ -401,6 +401,7 @@ export default {
           "Content-Type": "application/json",
         },
       });
+      this.items[this.awardIndex].teams[this.index].premiado = intention;
        location.reload();
     },
   },
