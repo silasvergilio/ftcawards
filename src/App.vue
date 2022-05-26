@@ -28,12 +28,11 @@
 
 
       <v-btn
-      v-if="this.$store.state.user"
-        :disabled="invalid"
+       v-if="this.$store.state.user"
         color="#1E5AA8"
         depressed
         elevation="5"
-        outlined
+        style="margin-left: 1rem"
       >
         Logout
       </v-btn>
