@@ -11,7 +11,7 @@
 
       <!--Dialog de Confirmação -->
 
-      <v-dialog v-model="dialog" max-width="290">
+      <v-dialog v-model="dialog" max-width="350px">
         <v-card>
           <v-card-title class="headline">
             {{ items[awardIndex].name }}
@@ -28,7 +28,10 @@
           <v-card-text v-if="items[0].teams[0]">
             {{ items[awardIndex].teams[index].motive }}
           </v-card-text>
-          <v-card-actions>
+          <v-card-actions
+          
+          style="display: flex; flex-direction: column"
+          >
             <v-spacer></v-spacer>
 
             <v-btn
@@ -52,9 +55,9 @@
             >
               Premiar
             </v-btn>
-          <br>
+            <br />
             <v-btn
-            v-if="this.$store.state.user.permission == 'Administrador'"
+              v-if="this.$store.state.user.permission == 'Administrador'"
               color="#F9A825"
               text
               @click="
@@ -227,41 +230,36 @@ export default {
       alert(msg);
     },
 
-    deleteAward(){
-
+    deleteAward() {
       let requisicao = {
-          id: this.items[this.awardIndex].teams[this.index].Teams_idTime,
-        };
+        id: this.items[this.awardIndex].teams[this.index].Teams_idTime,
+      };
 
-    var uri = "";
-         switch (this.items[this.awardIndex].name) {
-          case "Pensamento Criativo":
-            uri =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo";
-            break;
-          case "Conexão":
-            uri =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/conexao";
-            break;
-          case "Inovação":
-            uri =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao";
-            break;
-          case "Motivação":
-            uri =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao";
-            break;
-          case "Design":
-            uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/design";
-            break;
-          case "Controle":
-            uri =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
-            break;
-          default:
-            break;
-        }
-      
+      var uri = "";
+      switch (this.items[this.awardIndex].name) {
+        case "Pensamento Criativo":
+          uri =
+            "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo";
+          break;
+        case "Conexão":
+          uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/conexao";
+          break;
+        case "Inovação":
+          uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao";
+          break;
+        case "Motivação":
+          uri =
+            "https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao";
+          break;
+        case "Design":
+          uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/design";
+          break;
+        case "Controle":
+          uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
+          break;
+        default:
+          break;
+      }
 
       fetch(uri, {
         method: "DELETE",
@@ -270,10 +268,8 @@ export default {
           "Content-Type": "application/json",
         },
       });
-
+       location.reload();
     },
-
-    
 
     alreadyAwarded(teamValue, awardIndex) {
       for (var i = 0; i < this.items.length; i++) {
@@ -405,7 +401,7 @@ export default {
           "Content-Type": "application/json",
         },
       });
-      // location.reload();
+       location.reload();
     },
   },
   created() {
