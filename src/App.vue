@@ -15,6 +15,17 @@
           </v-list-item-content>
         </v-list-item>
 
+        <v-list-item 
+        v-if="this.$store.state.user"
+        @click="logout()">
+          <v-list-item-action>
+            <v-icon>mdi-logout</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Logout</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
         <v-img :src="require('./assets/logo.png')" />
       </v-list>
     </v-navigation-drawer>
@@ -25,17 +36,6 @@
       <v-toolbar-title v-if="this.$store.state.user" class="user-title">
         {{ this.$store.state.user.fullName }}
       </v-toolbar-title>
-
-
-      <v-btn
-       v-if="this.$store.state.user"
-        color="#1E5AA8"
-        depressed
-        elevation="5"
-        style="margin-left: 1rem"
-      >
-        Logout
-      </v-btn>
     </v-app-bar>
 
     <v-content>
@@ -57,6 +57,14 @@ export default {
   props: {
     source: String,
   },
+
+  methods: {
+    logout() {
+      this.$store.commit("updateUser", null);
+     // this.$router.push("/listTeams");
+    },
+  },
+
   data: () => ({
     user: null,
     drawer: null,
