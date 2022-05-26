@@ -109,7 +109,7 @@ export default {
       window.alert(JSON.stringify(requisicao));
       this.$refs.form.reset();
 
-      fetch("http://localhost:3000/teams", {
+      fetch("https://ftc-awards-server-mysql.herokuapp.com/teams", {
         method: "post",
         body: JSON.stringify(requisicao),
         headers: {
