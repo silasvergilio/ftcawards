@@ -402,7 +402,7 @@ export default {
         },
       });
       this.items[this.awardIndex].teams[this.index].premiado = intention;
-       location.reload();
+     //  location.reload();
     },
   },
   created() {
