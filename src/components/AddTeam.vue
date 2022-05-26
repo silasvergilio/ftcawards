@@ -106,7 +106,7 @@ export default {
         school: escolaTime,
         state: estadoTime,
       };
-      window.alert(JSON.stringify(requisicao));
+    //  window.alert(JSON.stringify(requisicao));
       this.$refs.form.reset();
 
       fetch("https://ftc-awards-server-mysql.herokuapp.com/teams", {

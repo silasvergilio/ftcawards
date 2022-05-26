@@ -28,10 +28,7 @@
           <v-card-text v-if="items[0].teams[0]">
             {{ items[awardIndex].teams[index].motive }}
           </v-card-text>
-          <v-card-actions
-          
-          style="display: flex; flex-direction: column"
-          >
+          <v-card-actions style="display: flex; flex-direction: column">
             <v-spacer></v-spacer>
 
             <v-btn
@@ -90,6 +87,7 @@
                   v-model="item.teams"
                   :group="item"
                   style="min-height: 10px"
+                  @end="onEnd()"
                 >
                   <v-list-item
                     color="primary"
@@ -230,6 +228,11 @@ export default {
       alert(msg);
     },
 
+    onEnd() {
+      /* eslint-disable*/
+      console.log("OnEnd");
+    },
+
     deleteAward() {
       let requisicao = {
         id: this.items[this.awardIndex].teams[this.index].Teams_idTime,
@@ -268,7 +271,7 @@ export default {
           "Content-Type": "application/json",
         },
       });
-       location.reload();
+      location.reload();
     },
 
     alreadyAwarded(teamValue, awardIndex) {
@@ -402,7 +405,7 @@ export default {
         },
       });
       this.items[this.awardIndex].teams[this.index].premiado = intention;
-     //  location.reload();
+      //  location.reload();
     },
   },
   created() {
