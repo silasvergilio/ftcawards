@@ -31,21 +31,17 @@
 
           <v-col cols="12" md="4">
             <v-text-field
-              label="Número da Equipe"
+              label="Escola"
               prepend-icon="mdi-pound-box-outline"
-              v-model="teamNumber"
-              :rules="[rules.teamNumber]"
-              v-mask="'###############'"
+              v-model="school"
             ></v-text-field>
           </v-col>
 
           <v-col cols="12" md="4">
             <v-text-field
-              label="Número da Equipe"
+              label="Estado"
               prepend-icon="mdi-pound-box-outline"
-              v-model="teamNumber"
-              :rules="[rules.teamNumber]"
-              v-mask="'###############'"
+              v-model="state"
             ></v-text-field>
           </v-col>
 
@@ -62,7 +58,7 @@
               :rounded="true"
               :outlined="true"
               v-on:click="
-                adicionaTime(teamName, teamNumber, 'EscolaTime', 'EstadoTime')
+                adicionaTime(teamName, teamNumber, state, school)
               "
             >
               Adicionar
