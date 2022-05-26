@@ -97,26 +97,25 @@ export default {
         };
         // window.alert(JSON.stringify(requisicao));
         var url;
-        var BASE_URI = location.hostname;
 
         switch (this.award.value) {
           case 1:
-            url = "http://" + BASE_URI + ":3000/awards/pensamentocriativo";
+            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo";
             break;
           case 2:
-            url = "http://" + BASE_URI + ":3000/awards/conexao";
+            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/conexao";
             break;
           case 3:
-            url = "http://" + BASE_URI + ":3000/awards/inovacao";
+            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao";
             break;
           case 4:
-            url = "http://" + BASE_URI + ":3000/awards/design";
+            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/design";
             break;
           case 5:
-            url = "http://" + BASE_URI + ":3000/awards/motivacao";
+            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao";
             break;
           case 6:
-            url = "http://" + BASE_URI + ":3000/awards/controle";
+            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
             break;
         }
         fetch(url, {
@@ -148,7 +147,7 @@ export default {
   created() {
     var BASE_URI = location.hostname;
 
-    fetch("http://" + BASE_URI + ":3000/teams", {
+    fetch("https://ftc-awards-server-mysql.herokuapp.com/teams", {
       credentials: "include",
     })
       .then((response) => response.json())

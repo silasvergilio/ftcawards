@@ -72,15 +72,27 @@ const router = new VueRouter({
     },
     {
       path: '/awards',
-      component: Awards
+      component: Awards,
+      beforeEnter: (to, from, next) => {
+        if(!store.state.user) next('/login');
+        else next();
+      }
     },
     {
       path: '/addTeam',
-      component: AddTeam
+      component: AddTeam,
+      beforeEnter: (to, from, next) => {
+        if(!store.state.user) next('/login');
+        else next();
+      }
     },
     {
       path: '/nominateteam',
-      component: nominateTeam
+      component: nominateTeam,
+      beforeEnter: (to, from, next) => {
+        if(!store.state.user) next('/login');
+        else next();
+      }
     },
     {
       path: '/listTeams',
