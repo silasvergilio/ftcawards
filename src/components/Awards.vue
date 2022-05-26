@@ -230,7 +230,7 @@ export default {
 
     onEnd() {
       /* eslint-disable*/
-      console.log("OnEnd");
+      console.log(this.items[this.awardIndex].teams[this.index].text);
     },
 
     deleteAward() {
