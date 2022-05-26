@@ -15,9 +15,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-list-item 
-        v-if="this.$store.state.user"
-        @click="logout()">
+        <v-list-item v-if="this.$store.state.user" @click="logout()">
           <v-list-item-action>
             <v-icon>mdi-logout</v-icon>
           </v-list-item-action>
@@ -62,7 +60,6 @@ export default {
     logout() {
       this.$router.push("/login");
       this.$store.commit("updateUser", null);
-      
     },
   },
 
@@ -80,7 +77,7 @@ export default {
         name: "Adicionar Usuário",
         icon: "mdi-account-multiple-plus",
         route: "/adduser",
-        permission: [""],
+        permission: ["Administrador"],
       },
       {
         name: "Adicionar Time",

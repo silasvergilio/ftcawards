@@ -30,6 +30,26 @@
           </v-col>
 
           <v-col cols="12" md="4">
+            <v-text-field
+              label="Número da Equipe"
+              prepend-icon="mdi-pound-box-outline"
+              v-model="teamNumber"
+              :rules="[rules.teamNumber]"
+              v-mask="'###############'"
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" md="4">
+            <v-text-field
+              label="Número da Equipe"
+              prepend-icon="mdi-pound-box-outline"
+              v-model="teamNumber"
+              :rules="[rules.teamNumber]"
+              v-mask="'###############'"
+            ></v-text-field>
+          </v-col>
+
+          <v-col cols="12" md="4">
             <v-btn
               class="
                 white--text
