@@ -100,22 +100,27 @@ export default {
 
         switch (this.award.value) {
           case 1:
-            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo";
+            url =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo";
             break;
           case 2:
-            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/conexao";
+            url =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/conexao";
             break;
           case 3:
-            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao";
+            url =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao";
             break;
           case 4:
             url = "https://ftc-awards-server-mysql.herokuapp.com/awards/design";
             break;
           case 5:
-            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao";
+            url =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao";
             break;
           case 6:
-            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
+            url =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
             break;
         }
         fetch(url, {
@@ -139,13 +144,11 @@ export default {
   },
   computed: {
     invalid() {
-      if(this.message) return this.message.length > 60;
+      if (this.message) return this.message.length > 60;
       return false;
-
     },
   },
   created() {
-
     fetch("https://ftc-awards-server-mysql.herokuapp.com/teams", {
       credentials: "include",
     })
