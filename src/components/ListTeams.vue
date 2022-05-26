@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
-     <!--    <v-img
+        <!--    <v-img
           :src="require('../assets/fotos_times/' + times[index].value + '.jpg')"
         /> -->
       </v-card>
@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     changeIndex: function (newTeam) {
-          this.$store.commit('increment')
+      this.$store.commit("increment");
 
       for (let k = 0; k < this.times.length; k++) {
         if (newTeam == this.times[k].value) this.index = k;
@@ -59,14 +59,14 @@ export default {
   },
 
   created() {
-
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/teams",{credentials: 'include'})
+    fetch("https://ftc-awards-server-mysql.herokuapp.com/teams", {
+      credentials: "include",
+    })
       .then((response) => response.json())
       .then((json) => {
         this.times = json;
-      }).catch( () =>{
-
-      } )
+      })
+      .catch(() => {});
   },
 };
 </script>

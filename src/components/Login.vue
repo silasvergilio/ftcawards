@@ -135,6 +135,8 @@ export default {
         body: JSON.stringify(requisicao),
         headers: {
           "Content-Type": "application/json",
+           'Accept': 'application/json',
+          'Access-Control-Allow-Origin': 'https://ftc-awards-server-mysql.herokuapp.com'
         },
       })
         .then((response) => {
