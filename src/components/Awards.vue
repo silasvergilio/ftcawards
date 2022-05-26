@@ -226,7 +226,7 @@ export default {
       alert(msg);
     },
 
-    delteAward(){
+    deleteAward(){
 
       let requisicao = {
           id: this.items[this.awardIndex].teams[this.index].Teams_idTime,
