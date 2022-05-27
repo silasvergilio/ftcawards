@@ -9,6 +9,8 @@
       >
       </CardTitlePage>
 
+      <Loader v-bind:overlay="loader"> </Loader>
+
       <v-row>
         <v-col cols="12" md="4">
           <v-combobox
@@ -63,12 +65,15 @@
 
 <script>
 import CardTitlePage from "./CardTitlePage";
+import Loader from "./Loader.vue";
+
 
 export default {
   data() {
     return {
       times: [],
       timesNome: [],
+      loader: false,
 
       premios: [
         { text: "Pensamento Criativo", value: 1 },
@@ -141,6 +146,7 @@ export default {
   },
   components: {
     CardTitlePage,
+    Loader
   },
   computed: {
     invalid() {
@@ -149,11 +155,13 @@ export default {
     },
   },
   created() {
+    this.loader = true;
     fetch("https://ftc-awards-server-mysql.herokuapp.com/teams", {
       credentials: "include",
     })
       .then((response) => response.json())
       .then((json) => {
+        this.loader = false;
         this.times = json;
       });
   },
