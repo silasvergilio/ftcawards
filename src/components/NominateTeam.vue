@@ -93,6 +93,7 @@ export default {
         if (!this.team || !this.award) alert("Complete a indicação");
       },
       indicaTime: function () {
+        this.loader = true;
         var requisicao = {
           text: this.team.text,
           motive: this.message,
@@ -136,6 +137,7 @@ export default {
             "Content-Type": "application/json",
           },
         }).then(function () {
+          this.loader = false;
           //window.alert("Time adicionado com sucesso !");
           //window.alert(response.status);
         });
