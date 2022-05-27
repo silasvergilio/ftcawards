@@ -31,7 +31,7 @@
     <v-app-bar app color="#A5CA18" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>FTC - Freight Frenzy - Etapa Nacional</v-toolbar-title>
-      <v-toolbar-title v-if="this.$store.state.user" class="user-title">
+      <v-toolbar-title v-if="this.$store.state.user">
         {{ this.$store.state.user.fullName }}
       </v-toolbar-title>
     </v-app-bar>
