@@ -84,7 +84,8 @@
             md="4"
             lg="3"
           >
-            <v-card>
+            <v-card
+            max-width="100%">
               <v-card-title class="subheading">{{ item.name }}</v-card-title>
 
               <v-list>
