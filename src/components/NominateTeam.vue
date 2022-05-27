@@ -67,8 +67,14 @@
 import CardTitlePage from "./CardTitlePage";
 import Loader from "./Loader.vue";
 
-
 export default {
+  methods:{
+     AwardException(message, serverError) {
+      this.message = message;
+      this.name = "AwardException";
+      this.sqlError = serverError;
+    },
+  },
   data() {
     return {
       times: [],
@@ -136,8 +142,26 @@ export default {
           headers: {
             "Content-Type": "application/json",
           },
-        }).then(() => {
-          this.loader = false;
+        }).then((response) => {
+          /* eslint-disable*/
+          return response.json();
+        })
+        .then((response) => {
+          /* eslint-disable*/
+          if (response.SqlError) {
+            if (response.SqlError.errno == 1010) {
+              throw new this.AwardException(
+                "Equipe Já indicada",
+                response.SqlError
+              );
+            } 
+          }
+        })
+        .catch((err) => {
+          /* eslint-disable*/
+          this.dialog = true;
+          this.dialogMessage.title = "Erro";
+          this.dialogMessage.message = err.message;
         });
 
         this.$refs.form.reset();
@@ -146,7 +170,7 @@ export default {
   },
   components: {
     CardTitlePage,
-    Loader
+    Loader,
   },
   computed: {
     invalid() {

@@ -225,6 +225,7 @@ export default {
     ],
   }),
   methods: {
+
     say: function (msg) {
       alert(msg);
     },
