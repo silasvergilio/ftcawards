@@ -235,6 +235,7 @@ export default {
     },
 
     deleteAward() {
+      this.loader = true;
       let requisicao = {
         id: this.items[this.awardIndex].teams[this.index].Teams_idTime,
       };
@@ -271,8 +272,12 @@ export default {
         headers: {
           "Content-Type": "application/json",
         },
-      }).then(() => {});
+      }).then(() => {
+
+      this.loader = false;
       location.reload();
+
+      });
     },
 
     alreadyAwarded(teamValue, awardIndex) {
