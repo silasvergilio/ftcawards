@@ -145,6 +145,7 @@ export default {
         })
           .then((response) => {
             /* eslint-disable*/
+            this.loader = false;
             return response.json();
           })
           .then((response) => {
@@ -157,7 +158,6 @@ export default {
                 );
               }
             }
-            this.loader = false;
           })
           .catch(() => {
             /* eslint-disable*/
