@@ -28,7 +28,9 @@
           <v-card-text v-if="items[0].teams[0]">
             {{ items[awardIndex].teams[index].motive }}
           </v-card-text>
-          <v-card-actions style="display: flex; flex-direction: column">
+          <v-card-actions
+          v-if="this.$store.state.user.permission == 'Administrador'"
+           style="display: flex; flex-direction: column">
             <v-spacer></v-spacer>
 
             <v-btn
