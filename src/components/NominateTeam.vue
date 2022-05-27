@@ -156,12 +156,13 @@ export default {
               );
             } 
           }
+          this.loader = false;
         })
-        .catch((err) => {
+        .catch(() => {
           /* eslint-disable*/
-          this.dialog = true;
-          this.dialogMessage.title = "Erro";
-          this.dialogMessage.message = err.message;
+          //this.dialog = true;
+         // this.dialogMessage.title = "Erro";
+         // this.dialogMessage.message = err.message;
         });
 
         this.$refs.form.reset();
