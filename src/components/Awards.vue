@@ -5,6 +5,8 @@
       :items-per-page.sync="itemsPerPage"
       hide-default-footer
     >
+      <Loader v-bind:overlay="loader"> </Loader>
+
       <template v-slot:header>
         <v-toolbar class="mb-2" color="#1E5AA8" dark flat> </v-toolbar>
       </template>
@@ -29,8 +31,9 @@
             {{ items[awardIndex].teams[index].motive }}
           </v-card-text>
           <v-card-actions
-          v-if="this.$store.state.user.permission == 'Administrador'"
-           style="display: flex; flex-direction: column">
+            v-if="this.$store.state.user.permission == 'Administrador'"
+            style="display: flex; flex-direction: column"
+          >
             <v-spacer></v-spacer>
 
             <v-btn
@@ -157,12 +160,6 @@
         <v-icon dark>mdi-content-save-all</v-icon>
       </v-btn>
 
-      <v-progress-circular
-        v-if="loading == true"
-        indeterminate
-        color="primary"
-      ></v-progress-circular>
-
       <v-btn
         :to="'/callback'"
         class="mx-4"
@@ -183,20 +180,22 @@
 
 <script>
 import draggable from "vuedraggable";
+import Loader from "./Loader.vue";
 
 export default {
   components: {
     draggable,
+    Loader,
   },
 
   data: () => ({
     itemsPerPage: 5,
+    loader: false,
 
     dialog: false,
 
     index: 0,
     awardIndex: 0,
-    loading: false,
 
     items: [
       {
@@ -272,7 +271,7 @@ export default {
         headers: {
           "Content-Type": "application/json",
         },
-      });
+      }).then(() => {});
       location.reload();
     },
 
@@ -316,7 +315,7 @@ export default {
       };
       var uri = "";
       var BASE_URI = location.hostname;
-      this.loading = true;
+      this.loader = true;
 
       switch (this.items[awardIndex].name) {
         case "Pensamento Criativo":
@@ -349,11 +348,12 @@ export default {
         },
       });
 
-      this.loading = false;
+      this.loader = false;
     },
 
     award: function (intention) {
       let allowAward = true;
+      this.loader = true;
 
       if (intention) {
         for (let j = 0; j < this.items[this.awardIndex].teams.length; j++) {
@@ -405,8 +405,10 @@ export default {
         headers: {
           "Content-Type": "application/json",
         },
+      }).then((response) => {
+        this.loader = false;
+        this.items[this.awardIndex].teams[this.index].premiado = intention;
       });
-      this.items[this.awardIndex].teams[this.index].premiado = intention;
       //  location.reload();
     },
   },
