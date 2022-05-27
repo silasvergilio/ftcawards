@@ -149,7 +149,7 @@
         </v-row>
       </template>
 
-      <v-btn
+      <!-- <v-btn
         v-on:click="updateAndSave()"
         class="mx-4"
         fab
@@ -158,7 +158,7 @@
         color="blue darken-2"
       >
         <v-icon dark>mdi-content-save-all</v-icon>
-      </v-btn>
+      </v-btn> -->
 
       <v-btn
         :to="'/callback'"

@@ -68,8 +68,8 @@ import CardTitlePage from "./CardTitlePage";
 import Loader from "./Loader.vue";
 
 export default {
-  methods:{
-     AwardException(message, serverError) {
+  methods: {
+    AwardException(message, serverError) {
       this.message = message;
       this.name = "AwardException";
       this.sqlError = serverError;
@@ -142,28 +142,29 @@ export default {
           headers: {
             "Content-Type": "application/json",
           },
-        }).then((response) => {
-          /* eslint-disable*/
-          return response.json();
         })
-        .then((response) => {
-          /* eslint-disable*/
-          if (response.SqlError) {
-            if (response.SqlError.errno == 1010) {
-              throw new this.AwardException(
-                "Equipe Já indicada",
-                response.SqlError
-              );
-            } 
-          }
-          this.loader = false;
-        })
-        .catch(() => {
-          /* eslint-disable*/
-          //this.dialog = true;
-         // this.dialogMessage.title = "Erro";
-         // this.dialogMessage.message = err.message;
-        });
+          .then((response) => {
+            /* eslint-disable*/
+            return response.json();
+          })
+          .then((response) => {
+            /* eslint-disable*/
+            if (response.SqlError) {
+              if (response.SqlError.errno == 1010) {
+                throw new this.AwardException(
+                  "Equipe Já indicada",
+                  response.SqlError
+                );
+              }
+            }
+            this.loader = false;
+          })
+          .catch(() => {
+            /* eslint-disable*/
+            //this.dialog = true;
+            // this.dialogMessage.title = "Erro";
+            // this.dialogMessage.message = err.message;
+          });
 
         this.$refs.form.reset();
       },
