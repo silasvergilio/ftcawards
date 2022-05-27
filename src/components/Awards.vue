@@ -83,9 +83,9 @@
             sm="6"
             md="4"
             lg="3"
+            style="max-width: 100%"
           >
-            <v-card
-            max-width="100%">
+            <v-card>
               <v-card-title class="subheading">{{ item.name }}</v-card-title>
 
               <v-list>
