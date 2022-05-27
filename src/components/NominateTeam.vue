@@ -136,10 +136,8 @@ export default {
           headers: {
             "Content-Type": "application/json",
           },
-        }).then(function () {
+        }).then(() => {
           this.loader = false;
-          //window.alert("Time adicionado com sucesso !");
-          //window.alert(response.status);
         });
 
         this.$refs.form.reset();
