@@ -9,6 +9,8 @@
     </v-dialog>
     <!--Dialog de Confirmação -->
 
+      <Loader v-bind:overlay="loader"> </Loader>
+
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -40,13 +42,19 @@
 </template>
 
 <script>
+import Loader from "./Loader.vue";
+
 export default {
   data() {
     return {
       times: [],
       index: 0,
       dialog: false,
+      loader: false,
     };
+  },
+  components:{
+    Loader
   },
   methods: {
     changeIndex: function (newTeam) {
@@ -59,11 +67,13 @@ export default {
   },
 
   created() {
+    this.loader = true;
     fetch("https://ftc-awards-server-mysql.herokuapp.com/teams", {
       credentials: "include",
     })
       .then((response) => response.json())
       .then((json) => {
+        this.loader = false;
         this.times = json;
       })
       .catch(() => {});
