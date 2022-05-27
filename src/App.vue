@@ -31,9 +31,11 @@
     <v-app-bar app color="#A5CA18" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       <v-toolbar-title>FTC - Freight Frenzy - Etapa Nacional</v-toolbar-title>
-      <v-toolbar-title v-if="this.$store.state.user">
+
+      <v-spacer></v-spacer>
+      <p v-if="this.$store.state.user" class="font-weight-bold">
         {{ this.$store.state.user.fullName }}
-      </v-toolbar-title>
+      </p>
     </v-app-bar>
 
     <v-content>
@@ -115,7 +117,7 @@ export default {
       if (!this.$store.state.user) {
         if (this.menuItens.indexOf(this.menuItens[0] === -1))
           allowedMenuItems.push(this.menuItens[0]);
-       // allowedMenuItems.push(this.menuItens[1]);
+        // allowedMenuItems.push(this.menuItens[1]);
       }
       this.menuItens.forEach((menuItem) => {
         if (this.$store.state.user) {
