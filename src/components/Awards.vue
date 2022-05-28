@@ -189,6 +189,7 @@ export default {
   },
 
   data: () => ({
+    awardReqCount: 0,
     awardCount: 0,
     orderReqCount: 0,
     itemsPerPage: 5,
@@ -352,10 +353,9 @@ export default {
           "Content-Type": "application/json",
         },
       }).then(() => {
-       this.orderReqCount++
-       if(this.orderReqCount == this.awardCount) this.loader = false;
+        this.orderReqCount++;
+        if (this.orderReqCount == this.awardCount) this.loader = false;
       });
-
     },
 
     award: function (intention) {
@@ -420,12 +420,15 @@ export default {
     },
   },
   created() {
+    this.loader = true;
     fetch(
       "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo"
     )
       .then((response) => response.json())
       .then((json) => {
         /* eslint-disable*/
+        this.awardReqCount++;
+        if (this.awardReqCount == 6) this.loader = false;
         this.items[0].teams = json;
         this.items[0].teams.sort(function (a, b) {
           return a.position - b.position;
@@ -435,6 +438,9 @@ export default {
     fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/conexao")
       .then((response) => response.json())
       .then((json) => {
+        this.awardReqCount++;
+        if (this.awardReqCount == 6) this.loader = false;
+
         this.items[1].teams = json;
         this.items[1].teams.sort(function (a, b) {
           return a.position - b.position;
@@ -444,6 +450,9 @@ export default {
     fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao")
       .then((response) => response.json())
       .then((json) => {
+        this.awardReqCount++;
+        if (this.awardReqCount == 6) this.loader = false;
+
         this.items[2].teams = json;
         this.items[2].teams.sort(function (a, b) {
           return a.position - b.position;
@@ -453,6 +462,9 @@ export default {
     fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/design")
       .then((response) => response.json())
       .then((json) => {
+        this.awardReqCount++;
+        if (this.awardReqCount == 6) this.loader = false;
+
         this.items[3].teams = json;
         this.items[3].teams.sort(function (a, b) {
           return a.position - b.position;
@@ -462,8 +474,10 @@ export default {
     fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao")
       .then((response) => response.json())
       .then((json) => {
+        this.awardReqCount++;
+        if (this.awardReqCount == 6) this.loader = false;
+
         this.items[4].teams = json;
-        /* eslint-disable*/
         this.items[4].teams.sort(function (a, b) {
           return a.position - b.position;
         });
@@ -472,6 +486,9 @@ export default {
     fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/controle")
       .then((response) => response.json())
       .then((json) => {
+        this.awardReqCount++;
+        if (this.awardReqCount == 6) this.loader = false;
+
         this.items[5].teams = json;
         this.items[5].teams.sort(function (a, b) {
           return a.position - b.position;
