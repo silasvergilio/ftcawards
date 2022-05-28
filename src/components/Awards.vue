@@ -189,6 +189,8 @@ export default {
   },
 
   data: () => ({
+    awardCount: 0,
+    orderReqCount: 0,
     itemsPerPage: 5,
     loader: false,
 
@@ -292,8 +294,10 @@ export default {
     },
 
     updateAndSave: function () {
+      this.loader = true;
       for (let i = 0; i < this.items.length; i++) {
         for (let k = 0; k < this.items[i].teams.length; k++) {
+          this.awardCount++;
           this.position(i, k);
         }
       }
@@ -316,7 +320,6 @@ export default {
         id: this.items[awardIndex].teams[teamIndex].Teams_idTime,
       };
       var uri = "";
-      this.loader = true;
 
       switch (this.items[awardIndex].name) {
         case "Pensamento Criativo":
@@ -348,9 +351,11 @@ export default {
         headers: {
           "Content-Type": "application/json",
         },
-      });
+      }).then((response) => {
+       this.orderReqCount++
+       if(this.orderReqCount == this.awardCount) this.loader = false;
+      });;
 
-      this.loader = false;
     },
 
     award: function (intention) {
