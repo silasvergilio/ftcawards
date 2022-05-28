@@ -93,7 +93,6 @@
                   v-model="item.teams"
                   :group="item"
                   style="min-height: 10px"
-                  @end="onEnd(event)"
                 >
                   <v-list-item
                     color="primary"
@@ -150,7 +149,7 @@
         </v-row>
       </template>
 
-      <!-- <v-btn
+      <v-btn
         v-on:click="updateAndSave()"
         class="mx-4"
         fab
@@ -159,7 +158,7 @@
         color="blue darken-2"
       >
         <v-icon dark>mdi-content-save-all</v-icon>
-      </v-btn> -->
+      </v-btn>
 
       <v-btn
         :to="'/callback'"
@@ -223,18 +222,15 @@ export default {
         name: "Controle",
         teams: [],
       },
+      {
+        name: "Inspiração",
+        teams: [],
+      },
     ],
   }),
   methods: {
-
     say: function (msg) {
       alert(msg);
-    },
-
-    onEnd(event) {
-      /* eslint-disable*/
-      console.log(event);
-      console.log(this.items[this.awardIndex].teams[this.index].text);
     },
 
     deleteAward() {
@@ -276,10 +272,8 @@ export default {
           "Content-Type": "application/json",
         },
       }).then(() => {
-
-      this.loader = false;
-      location.reload();
-
+        this.loader = false;
+        location.reload();
       });
     },
 
@@ -318,38 +312,38 @@ export default {
 
     position: function (awardIndex, teamIndex) {
       var requisicao = {
-        value: this.items[awardIndex].teams[teamIndex].value,
         position: teamIndex,
+        id: this.items[awardIndex].teams[teamIndex].Teams_idTime,
       };
       var uri = "";
-      var BASE_URI = location.hostname;
       this.loader = true;
 
       switch (this.items[awardIndex].name) {
         case "Pensamento Criativo":
-          uri = "http://" + BASE_URI + ":3000/OrdemTime/PensamentoCriativo";
+          uri =
+            "https://ftc-awards-server-mysql.herokuapp.com/order/pensamentocriativo";
           break;
         case "Conexão":
-          uri = "http://" + BASE_URI + ":3000/OrdemTime/Conexao";
+          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/conexao";
           break;
         case "Inovação":
-          uri = "http://" + BASE_URI + ":3000/OrdemTime/Inovacao";
+          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/inovacao";
           break;
         case "Motivação":
-          uri = "http://" + BASE_URI + ":3000/OrdemTime/Motivacao";
+          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/motivacao";
           break;
         case "Design":
-          uri = "http://" + BASE_URI + ":3000/OrdemTime/Design";
+          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/design";
           break;
         case "Controle":
-          uri = "http://" + BASE_URI + ":3000/OrdemTime/Controle";
+          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/controle";
           break;
         default:
           break;
       }
 
       fetch(uri, {
-        method: "post",
+        method: "PUT",
         body: JSON.stringify(requisicao),
         headers: {
           "Content-Type": "application/json",
