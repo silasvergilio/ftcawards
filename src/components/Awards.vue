@@ -351,10 +351,10 @@ export default {
         headers: {
           "Content-Type": "application/json",
         },
-      }).then((response) => {
+      }).then(() => {
        this.orderReqCount++
        if(this.orderReqCount == this.awardCount) this.loader = false;
-      });;
+      });
 
     },
 
