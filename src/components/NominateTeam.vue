@@ -88,6 +88,7 @@ export default {
         { text: "Design", value: 4 },
         { text: "Motivação", value: 5 },
         { text: "Controle", value: 6 },
+        { text: "Inspiração", value: 7 },
       ],
       salas: [{ text: "A" }, { text: "B" }, { text: "C" }, { text: "D" }],
 
@@ -133,6 +134,10 @@ export default {
           case 6:
             url =
               "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
+            break;
+          case 7:
+            url =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/inspire";
             break;
         }
         fetch(url, {

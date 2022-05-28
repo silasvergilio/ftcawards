@@ -264,6 +264,9 @@ export default {
         case "Controle":
           uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
           break;
+        case "Inspiração":
+          uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/inspire";
+          break;
         default:
           break;
       }
@@ -342,6 +345,9 @@ export default {
         case "Controle":
           uri = "https://ftc-awards-server-mysql.herokuapp.com/order/controle";
           break;
+        case "Inspiração":
+          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/inspire";
+          break;
         default:
           break;
       }
@@ -401,6 +407,10 @@ export default {
             uri =
               "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
             break;
+          case "Inspiração":
+            uri =
+              "https://ftc-awards-server-mysql.herokuapp.com/awards/inspire";
+            break;
           default:
             break;
         }
@@ -454,6 +464,7 @@ export default {
         if (this.awardReqCount == 6) this.loader = false;
 
         this.items[2].teams = json;
+
         this.items[2].teams.sort(function (a, b) {
           return a.position - b.position;
         });
@@ -491,6 +502,17 @@ export default {
 
         this.items[5].teams = json;
         this.items[5].teams.sort(function (a, b) {
+          return a.position - b.position;
+        });
+      });
+    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/inspire")
+      .then((response) => response.json())
+      .then((json) => {
+        this.awardReqCount++;
+        if (this.awardReqCount == 7) this.loader = false;
+
+        this.items[6].teams = json;
+        this.items[6].teams.sort(function (a, b) {
           return a.position - b.position;
         });
       });
