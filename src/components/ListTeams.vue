@@ -2,14 +2,15 @@
   <div>
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
-           <v-img
-          :src="require('../assets/fotos_times/' + times[index].value + '.jpg')"
+        <v-img
+          v-if="this.times.length > 0"
+          :src="require('../assets/fotos_times/' + this.times[index].value + '.jpg')"
         />
       </v-card>
     </v-dialog>
     <!--Dialog de Confirmação -->
 
-      <Loader v-bind:overlay="loader"> </Loader>
+    <Loader v-bind:overlay="loader"> </Loader>
 
     <v-simple-table>
       <template v-slot:default>
@@ -53,8 +54,8 @@ export default {
       loader: false,
     };
   },
-  components:{
-    Loader
+  components: {
+    Loader,
   },
   methods: {
     changeIndex: function (newTeam) {
