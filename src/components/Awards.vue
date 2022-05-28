@@ -93,7 +93,7 @@
                   v-model="item.teams"
                   :group="item"
                   style="min-height: 10px"
-                  @end="onEnd()"
+                  @end="onEnd(event)"
                 >
                   <v-list-item
                     color="primary"
@@ -231,8 +231,9 @@ export default {
       alert(msg);
     },
 
-    onEnd() {
+    onEnd(event) {
       /* eslint-disable*/
+      console.log(event);
       console.log(this.items[this.awardIndex].teams[this.index].text);
     },
 
