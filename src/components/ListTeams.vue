@@ -2,9 +2,9 @@
   <div>
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
-        <!--    <v-img
+           <v-img
           :src="require('../assets/fotos_times/' + times[index].value + '.jpg')"
-        /> -->
+        />
       </v-card>
     </v-dialog>
     <!--Dialog de Confirmação -->
