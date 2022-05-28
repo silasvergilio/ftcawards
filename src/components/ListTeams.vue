@@ -4,7 +4,7 @@
       <v-card>
         <v-img
           v-if="this.times.length > 0"
-          :src="require('../assets/fotos_times/' + this.times[index].value + '.jpg')"
+          :src="require('../assets/fotos_times/' + '1928' + '.jpg')"
         />
       </v-card>
     </v-dialog>
@@ -18,8 +18,8 @@
           <tr>
             <th class="text-left">Nome</th>
             <th class="text-left">Número</th>
-            <th class="text-left">Estado</th>
             <th class="text-left">Escola</th>
+            <th class="text-left">Estado</th>
           </tr>
         </thead>
         <tbody>
