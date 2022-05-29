@@ -19,13 +19,13 @@
             {{ items[awardIndex].name }}
           </v-card-title>
 
-          <!-- <v-img
+          <v-img
             :src="
               require('../assets/fotos_times/' +
                 items[awardIndex].teams[index].value +
                 '.jpg')
             "
-          /> -->
+          />
 
           <v-card-text v-if="items[0].teams[0]">
             {{ items[awardIndex].teams[index].motive }}
