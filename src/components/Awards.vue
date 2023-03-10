@@ -374,7 +374,7 @@ export default {
         }
       }
 
-      if (allowAward) {
+      if (allowAward || this.items[this.awardIndex].name == "Inspiração") {
         var requisicao = {
           value: this.items[this.awardIndex].teams[this.index].value,
           awardStatus: intention,
