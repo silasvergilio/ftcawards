@@ -60,7 +60,7 @@
             <v-col cols="12" md="12">
               <v-btn
                 :disabled=invalid
-                color="#1E5AA8"
+                color="#68C3E2"
                 depressed
                 elevation="5"
                 outlined

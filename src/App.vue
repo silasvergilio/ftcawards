@@ -24,13 +24,22 @@
           </v-list-item-content>
         </v-list-item>
 
-        <v-img :src="require('./assets/logo.png')" />
+        <div
+          style="
+            display: flex;
+            flex-direction: row;
+            justify-content: center;
+            padding-top: 10rem;
+          "
+        >
+          <v-img style="max-width: 50%" :src="require('./assets/logo.png')" />
+        </div>
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="#A5CA18" dark>
+    <v-app-bar app color="#FFB600" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>FTC - Freight Frenzy - Etapa Nacional</v-toolbar-title>
+      <v-toolbar-title>FTC - Power Play - Etapa Nacional</v-toolbar-title>
 
       <v-spacer></v-spacer>
       <p v-if="this.$store.state.user" class="font-weight-bold">
@@ -42,7 +51,7 @@
       <router-view></router-view>
     </v-content>
     <v-footer color="#68C3E2" app>
-      <span class="white--text">&copy; 2022 Silas dos Santos Vergilio</span>
+      <span class="white--text">&copy; 2023 Silas dos Santos Vergilio</span>
     </v-footer>
   </v-app>
 </template>
