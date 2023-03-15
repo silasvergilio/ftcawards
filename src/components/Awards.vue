@@ -536,11 +536,11 @@ export default {
 }
 
 .winner {
-  background: #c62828;
+  background: #ffd740;
 }
 
 .secondPlace{
-  background: blue;
+  background: #448aff;
 }
 
 .alreadyAwarded {
