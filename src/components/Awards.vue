@@ -384,7 +384,7 @@ export default {
         }
       }
 
-   //   if (allowAward || this.items[this.awardIndex].name == "Inspiração") {
+      if (allowAward || this.items[this.awardIndex].name == "Inspiração") {
         var requisicao = {
           value: this.items[this.awardIndex].teams[this.index].value,
           awardStatus: intention,
@@ -423,7 +423,7 @@ export default {
             break;
           default:
             break;
-     //   }
+        }
       }
 
       fetch(uri, {
