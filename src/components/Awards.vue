@@ -96,7 +96,7 @@
                 >
                   <v-list-item
                     color="primary"
-                    v-for="team in item.teams"
+                    v-for="(team, teamIndex) in item.teams"
                     v-bind:key="team.id"
                     v-on:click="
                       dialog = true;
@@ -104,7 +104,7 @@
                     "
                     :class="[
                       team.premiado
-                        ? 'winner'
+                        ? positionClass(index,teamIndex)
                         : alreadyAwarded(team.value, index)
                         ? 'alreadyAwarded'
                         : 'tile',
@@ -297,6 +297,16 @@ export default {
       return false;
     },
 
+    positionClass: function (award, index) {
+
+      for(var k = 0; k < index; k++){
+        if( this.items[award].teams[k].premiado) return 'secondPlace'
+      }
+
+      return 'winner'
+
+    },
+
     updateAndSave: function () {
       this.loader = true;
       for (let i = 0; i < this.items.length; i++) {
@@ -370,11 +380,11 @@ export default {
 
       if (intention) {
         for (let j = 0; j < this.items[this.awardIndex].teams.length; j++) {
-          if (this.items[this.awardIndex].teams[j].premiado) allowAward = false;
+          if (this.items[this.awardIndex].teams[j].premiado) allowAward = true;
         }
       }
 
-      if (allowAward || this.items[this.awardIndex].name == "Inspiração") {
+   //   if (allowAward || this.items[this.awardIndex].name == "Inspiração") {
         var requisicao = {
           value: this.items[this.awardIndex].teams[this.index].value,
           awardStatus: intention,
@@ -413,7 +423,7 @@ export default {
             break;
           default:
             break;
-        }
+     //   }
       }
 
       fetch(uri, {
@@ -527,6 +537,10 @@ export default {
 
 .winner {
   background: #c62828;
+}
+
+.secondPlace{
+  background: blue;
 }
 
 .alreadyAwarded {
