@@ -90,7 +90,7 @@ export default {
         { text: "Controle", value: 6 },
         { text: "Inspiração", value: 7 },
       ],
-      salas: [{ text: "A" }, { text: "B" }, { text: "C" }, { text: "D" }],
+      salas: [{ text: "A" }, { text: "B" }, { text: "C" }, { text: "D" }, { text: "E"}],
 
       message: "",
       team: "",
