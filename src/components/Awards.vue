@@ -20,7 +20,7 @@
           </v-card-title>
 
           <v-img
-            v-if="items[awardIndex].teams[index].imageLoad"
+            
             v-on:error="imgError(awardIndex, index)"
             :src="
               require('../assets/fotos_times/' +
