@@ -13,14 +13,14 @@
 
       <!--Dialog de Confirmação -->
 
-      <v-dialog v-model="dialog" max-width="350px">
+      <v-dialog v-if="dialog" v-model="dialog" max-width="350px">
         <v-card>
           <v-card-title class="headline">
             {{ items[awardIndex].name }}
           </v-card-title>
 
           <v-img
-            
+            v-if="items[awardIndex].teams[index].imageLoad"
             v-on:error="imgError(awardIndex, index)"
             :src="
               require('../assets/fotos_times/' +
