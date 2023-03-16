@@ -21,7 +21,7 @@
 
           <v-img
             v-if="items[awardIndex].teams[index].imageLoad"
-            @error="imgError(awardIndex, index)"
+            v-on:error="imgError(awardIndex, index)"
             :src="
               require('../assets/fotos_times/' +
                 items[awardIndex].teams[index].value +
