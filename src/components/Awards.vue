@@ -239,7 +239,7 @@ export default {
     },
 
     imgError(awardIndex, index) {
-      console.log("error loading image");
+      alert("error loading image");
       this.items[awardIndex].teams[index].imageLoad = false;
     },
 
