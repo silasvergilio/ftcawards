@@ -20,6 +20,7 @@
           </v-card-title>
 
           <v-img
+           @error="imgError()"
             :src="
               require('../assets/fotos_times/' +
                 items[awardIndex].teams[index].value +
@@ -189,6 +190,7 @@ export default {
   },
 
   data: () => ({
+
     awardReqCount: 0,
     awardCount: 0,
     orderReqCount: 0,
@@ -453,6 +455,10 @@ export default {
         this.items[0].teams.sort(function (a, b) {
           return a.position - b.position;
         });
+        this.items[0].teams.forEach( (element) =>{
+          element.imageLoad = false;
+          console.log(element);
+        })
       });
 
     fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/conexao")
