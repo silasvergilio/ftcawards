@@ -20,7 +20,8 @@
           </v-card-title>
 
           <v-img
-           @error="imgError()"
+            v-if="items[awardIndex].teams[index].imageLoad"
+            @error="imgError(awardIndex, index)"
             :src="
               require('../assets/fotos_times/' +
                 items[awardIndex].teams[index].value +
@@ -105,7 +106,7 @@
                     "
                     :class="[
                       team.premiado
-                        ? positionClass(index,teamIndex)
+                        ? positionClass(index, teamIndex)
                         : alreadyAwarded(team.value, index)
                         ? 'alreadyAwarded'
                         : 'tile',
@@ -190,7 +191,6 @@ export default {
   },
 
   data: () => ({
-
     awardReqCount: 0,
     awardCount: 0,
     orderReqCount: 0,
@@ -236,6 +236,10 @@ export default {
   methods: {
     say: function (msg) {
       alert(msg);
+    },
+
+    imgError(awardIndex, index) {
+      this.items[awardIndex].teams[index].imageLoad = false;
     },
 
     deleteAward() {
@@ -300,13 +304,11 @@ export default {
     },
 
     positionClass: function (award, index) {
-
-      for(var k = 0; k < index; k++){
-        if( this.items[award].teams[k].premiado) return 'secondPlace'
+      for (var k = 0; k < index; k++) {
+        if (this.items[award].teams[k].premiado) return "secondPlace";
       }
 
-      return 'winner'
-
+      return "winner";
     },
 
     updateAndSave: function () {
@@ -455,10 +457,9 @@ export default {
         this.items[0].teams.sort(function (a, b) {
           return a.position - b.position;
         });
-        this.items[0].teams.forEach( (element) =>{
-          element.imageLoad = false;
-          console.log(element);
-        })
+        this.items[0].teams.forEach((element) => {
+          element.imageLoad = true;
+        });
       });
 
     fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/conexao")
@@ -470,6 +471,9 @@ export default {
         this.items[1].teams = json;
         this.items[1].teams.sort(function (a, b) {
           return a.position - b.position;
+        });
+        this.items[1].teams.forEach((element) => {
+          element.imageLoad = true;
         });
       });
 
@@ -484,6 +488,9 @@ export default {
         this.items[2].teams.sort(function (a, b) {
           return a.position - b.position;
         });
+        this.items[2].teams.forEach((element) => {
+          element.imageLoad = true;
+        });
       });
 
     fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/design")
@@ -495,6 +502,9 @@ export default {
         this.items[3].teams = json;
         this.items[3].teams.sort(function (a, b) {
           return a.position - b.position;
+        });
+        this.items[3].teams.forEach((element) => {
+          element.imageLoad = true;
         });
       });
 
@@ -508,6 +518,9 @@ export default {
         this.items[4].teams.sort(function (a, b) {
           return a.position - b.position;
         });
+        this.items[4].teams.forEach((element) => {
+          element.imageLoad = true;
+        });
       });
 
     fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/controle")
@@ -520,6 +533,9 @@ export default {
         this.items[5].teams.sort(function (a, b) {
           return a.position - b.position;
         });
+        this.items[5].teams.forEach((element) => {
+          element.imageLoad = true;
+        });
       });
     fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/inspire")
       .then((response) => response.json())
@@ -530,6 +546,9 @@ export default {
         this.items[6].teams = json;
         this.items[6].teams.sort(function (a, b) {
           return a.position - b.position;
+        });
+        this.items[6].teams.forEach((element) => {
+          element.imageLoad = true;
         });
       });
   },
@@ -545,7 +564,7 @@ export default {
   background: #ffd740;
 }
 
-.secondPlace{
+.secondPlace {
   background: #448aff;
 }
 
