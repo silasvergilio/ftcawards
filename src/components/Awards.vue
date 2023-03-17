@@ -22,10 +22,7 @@
           <v-img
             v-if="items[awardIndex].teams[index].imageLoad"
             v-on:error="imgError(awardIndex, index)"
-            :src="
-              require('../assets/fotos_times/' +
-                items[awardIndex].teams[index].value +
-                '.jpg')
+            :src=" '../assets/fotos_times/' + items[awardIndex].teams[index].value +'.jpg'
             "
           />
 
@@ -239,7 +236,6 @@ export default {
     },
 
     imgError(awardIndex, index) {
-      alert("error loading image");
       this.items[awardIndex].teams[index].imageLoad = false;
     },
 
