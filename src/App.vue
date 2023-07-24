@@ -88,7 +88,7 @@ export default {
         name: "Adicionar Usuário",
         icon: "mdi-account-multiple-plus",
         route: "/adduser",
-        permission: ["Administrador"],
+        permission: [""],
       },
       {
         name: "Adicionar Time",
@@ -135,7 +135,18 @@ export default {
           }
         }
       });
-      return allowedMenuItems;
+      return [   {
+        name: "Login",
+        icon: "mdi-login",
+        route: "/login",
+        permission: [""],
+      },
+      {
+        name: "Adicionar Usuário",
+        icon: "mdi-account-multiple-plus",
+        route: "/adduser",
+        permission: [""],
+      },];
     },
   },
 };
