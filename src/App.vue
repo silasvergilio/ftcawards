@@ -39,7 +39,7 @@
 
     <v-app-bar app color="#FFB600" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>FTC - Power Play - Etapa Nacional</v-toolbar-title>
+      <v-toolbar-title>FTC - Center Stage</v-toolbar-title>
 
       <v-spacer></v-spacer>
       <p v-if="this.$store.state.user" class="font-weight-bold">
@@ -51,7 +51,7 @@
       <router-view></router-view>
     </v-content>
     <v-footer color="#68C3E2" app>
-      <span class="white--text">&copy; 2023 Silas dos Santos Vergilio</span>
+      <span class="white--text">&copy; 2024 Silas dos Santos Vergilio</span>
     </v-footer>
   </v-app>
 </template>
@@ -88,7 +88,7 @@ export default {
         name: "Adicionar Usuário",
         icon: "mdi-account-multiple-plus",
         route: "/adduser",
-        permission: ["Administrador"],
+        permission: [""],
       },
       {
         name: "Adicionar Time",
@@ -126,7 +126,7 @@ export default {
       if (!this.$store.state.user) {
         if (this.menuItens.indexOf(this.menuItens[0] === -1))
           allowedMenuItems.push(this.menuItens[0]);
-        // allowedMenuItems.push(this.menuItens[1]);
+          allowedMenuItems.push(this.menuItens[1]);
       }
       this.menuItens.forEach((menuItem) => {
         if (this.$store.state.user) {

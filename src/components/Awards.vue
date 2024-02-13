@@ -19,12 +19,10 @@
             {{ items[awardIndex].name }}
           </v-card-title>
 
-          <!-- <v-img
+          <v-img
             v-if="items[awardIndex].teams[index].imageLoad"
-            v-on:error="imgError(awardIndex, index)"
-            :src=" '../assets/fotos_times/' + items[awardIndex].teams[index].value +'.jpg'
-            "
-          /> -->
+            :src="srcComputed"
+          />
 
           <v-card-text v-if="items[0].teams[0]">
             {{ items[awardIndex].teams[index].motive }}
@@ -115,7 +113,7 @@
                           v-if="
                             item.teams.findIndex((x) => x.text === team.text) +
                               1 ==
-                            1
+                              1
                           "
                           >mdi-trophy</v-icon
                         >
@@ -123,11 +121,11 @@
                           v-else-if="
                             item.teams.findIndex((x) => x.text === team.text) +
                               1 >
-                            1
+                              1
                           "
                           >mdi-numeric-{{
                             item.teams.findIndex((x) => x.text === team.text) +
-                            1
+                              1
                           }}-box</v-icon
                         >
 
@@ -187,13 +185,29 @@ export default {
     Loader,
   },
 
+  computed: {
+    srcComputed() {
+      /* eslint-disable*/
+      let index = this.index;
+      try {
+        return require("../assets/fotos_times/" +
+          this.times[index].value +
+          ".jpg");
+      } catch {
+        return require("../assets/fotos_times/standard.png");
+      }
+    },
+  },
+
   data: () => ({
     awardReqCount: 0,
     awardCount: 0,
     orderReqCount: 0,
     itemsPerPage: 5,
     loader: false,
-
+    serverDomain: window.location.host.includes("localhost")
+      ? "http://localhost:3000"
+      : "https://ftc-awards-server-mysql.herokuapp.com",
     dialog: false,
 
     index: 0,
@@ -231,7 +245,7 @@ export default {
     ],
   }),
   methods: {
-    say: function (msg) {
+    say: function(msg) {
       alert(msg);
     },
 
@@ -248,27 +262,25 @@ export default {
       var uri = "";
       switch (this.items[this.awardIndex].name) {
         case "Pensamento Criativo":
-          uri =
-            "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo";
+          uri = `${this.serverDomain}/awards/PensamentoCriativo`;
           break;
         case "Conexão":
-          uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/conexao";
+          uri = `${this.serverDomain}/awards/Conexao`;
           break;
         case "Inovação":
-          uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao";
+          uri = `${this.serverDomain}/awards/Inovacao`;
           break;
         case "Motivação":
-          uri =
-            "https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao";
+          uri = `${this.serverDomain}/awards/Motivacao`;
           break;
         case "Design":
-          uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/design";
+          uri = `${this.serverDomain}/awards/Design`;
           break;
         case "Controle":
-          uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
+          uri = `${this.serverDomain}/awards/Controle`;
           break;
         case "Inspiração":
-          uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/inspire";
+          uri = `${this.serverDomain}/awards/Inspire`;
           break;
         default:
           break;
@@ -300,7 +312,7 @@ export default {
       return false;
     },
 
-    positionClass: function (award, index) {
+    positionClass: function(award, index) {
       for (var k = 0; k < index; k++) {
         if (this.items[award].teams[k].premiado) return "secondPlace";
       }
@@ -308,7 +320,7 @@ export default {
       return "winner";
     },
 
-    updateAndSave: function () {
+    updateAndSave: function() {
       this.loader = true;
       for (let i = 0; i < this.items.length; i++) {
         for (let k = 0; k < this.items[i].teams.length; k++) {
@@ -318,7 +330,7 @@ export default {
       }
     },
 
-    changeIndex: function (newTeam, newAward) {
+    changeIndex: function(newTeam, newAward) {
       for (let i = 0; i < this.items.length; i++) {
         if (newAward == this.items[i].name) this.awardIndex = i;
       }
@@ -329,7 +341,7 @@ export default {
       }
     },
 
-    position: function (awardIndex, teamIndex) {
+    position: function(awardIndex, teamIndex) {
       var requisicao = {
         position: teamIndex,
         id: this.items[awardIndex].teams[teamIndex].Teams_idTime,
@@ -337,27 +349,26 @@ export default {
       var uri = "";
 
       switch (this.items[awardIndex].name) {
-        case "Pensamento Criativo":
-          uri =
-            "https://ftc-awards-server-mysql.herokuapp.com/order/pensamentocriativo";
+       case "Pensamento Criativo":
+          uri = `${this.serverDomain}/awards/PensamentoCriativo`;
           break;
         case "Conexão":
-          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/conexao";
+          uri = `${this.serverDomain}/awards/Conexao`;
           break;
         case "Inovação":
-          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/inovacao";
+          uri = `${this.serverDomain}/awards/Inovacao`;
           break;
         case "Motivação":
-          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/motivacao";
+          uri = `${this.serverDomain}/awards/Motivacao`;
           break;
         case "Design":
-          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/design";
+          uri = `${this.serverDomain}/awards/Design`;
           break;
         case "Controle":
-          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/controle";
+          uri = `${this.serverDomain}/awards/Controle`;
           break;
         case "Inspiração":
-          uri = "https://ftc-awards-server-mysql.herokuapp.com/order/inspire";
+          uri = `${this.serverDomain}/awards/Inspire`;
           break;
         default:
           break;
@@ -375,7 +386,7 @@ export default {
       });
     },
 
-    award: function (intention) {
+    award: function(intention) {
       let allowAward = true;
       this.loader = true;
 
@@ -396,31 +407,25 @@ export default {
 
         switch (this.items[this.awardIndex].name) {
           case "Pensamento Criativo":
-            uri =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo";
-            break;
-          case "Conexão":
-            uri =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/conexao";
-            break;
-          case "Inovação":
-            uri =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao";
-            break;
-          case "Motivação":
-            uri =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao";
-            break;
-          case "Design":
-            uri = "https://ftc-awards-server-mysql.herokuapp.com/awards/design";
-            break;
-          case "Controle":
-            uri =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
-            break;
-          case "Inspiração":
-            uri =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/inspire";
+          uri = `${this.serverDomain}/awards/PensamentoCriativo`;
+          break;
+        case "Conexão":
+          uri = `${this.serverDomain}/awards/Conexao`;
+          break;
+        case "Inovação":
+          uri = `${this.serverDomain}/awards/Inovacao`;
+          break;
+        case "Motivação":
+          uri = `${this.serverDomain}/awards/Motivacao`;
+          break;
+        case "Design":
+          uri = `${this.serverDomain}/awards/Design`;
+          break;
+        case "Controle":
+          uri = `${this.serverDomain}/awards/Controle`;
+          break;
+        case "Inspiração":
+          uri = `${this.serverDomain}/awards/Inspire`;
             break;
           default:
             break;
@@ -443,7 +448,7 @@ export default {
   created() {
     this.loader = true;
     fetch(
-      "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo"
+     `${this.serverDomain}/awards/PensamentoCriativo`
     )
       .then((response) => response.json())
       .then((json) => {
@@ -451,7 +456,7 @@ export default {
         this.awardReqCount++;
         if (this.awardReqCount == 6) this.loader = false;
         this.items[0].teams = json;
-        this.items[0].teams.sort(function (a, b) {
+        this.items[0].teams.sort(function(a, b) {
           return a.position - b.position;
         });
         this.items[0].teams.forEach((element) => {
@@ -459,14 +464,14 @@ export default {
         });
       });
 
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/conexao")
+    fetch(`${this.serverDomain}/awards/Conexao`)
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
         if (this.awardReqCount == 6) this.loader = false;
 
         this.items[1].teams = json;
-        this.items[1].teams.sort(function (a, b) {
+        this.items[1].teams.sort(function(a, b) {
           return a.position - b.position;
         });
         this.items[1].teams.forEach((element) => {
@@ -474,7 +479,7 @@ export default {
         });
       });
 
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao")
+    fetch(`${this.serverDomain}/awards/Inovacao`)
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
@@ -482,7 +487,7 @@ export default {
 
         this.items[2].teams = json;
 
-        this.items[2].teams.sort(function (a, b) {
+        this.items[2].teams.sort(function(a, b) {
           return a.position - b.position;
         });
         this.items[2].teams.forEach((element) => {
@@ -490,14 +495,14 @@ export default {
         });
       });
 
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/design")
+    fetch(`${this.serverDomain}/awards/Design`)
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
         if (this.awardReqCount == 6) this.loader = false;
 
         this.items[3].teams = json;
-        this.items[3].teams.sort(function (a, b) {
+        this.items[3].teams.sort(function(a, b) {
           return a.position - b.position;
         });
         this.items[3].teams.forEach((element) => {
@@ -505,14 +510,14 @@ export default {
         });
       });
 
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao")
+    fetch(`${this.serverDomain}/awards/Motivacao`)
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
         if (this.awardReqCount == 6) this.loader = false;
 
         this.items[4].teams = json;
-        this.items[4].teams.sort(function (a, b) {
+        this.items[4].teams.sort(function(a, b) {
           return a.position - b.position;
         });
         this.items[4].teams.forEach((element) => {
@@ -520,28 +525,28 @@ export default {
         });
       });
 
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/controle")
+    fetch(`${this.serverDomain}/awards/Controle`)
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
         if (this.awardReqCount == 6) this.loader = false;
 
         this.items[5].teams = json;
-        this.items[5].teams.sort(function (a, b) {
+        this.items[5].teams.sort(function(a, b) {
           return a.position - b.position;
         });
         this.items[5].teams.forEach((element) => {
           element.imageLoad = true;
         });
       });
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/inspire")
+    fetch(`${this.serverDomain}/awards/Inspire`)
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
         if (this.awardReqCount == 7) this.loader = false;
 
         this.items[6].teams = json;
-        this.items[6].teams.sort(function (a, b) {
+        this.items[6].teams.sort(function(a, b) {
           return a.position - b.position;
         });
         this.items[6].teams.forEach((element) => {

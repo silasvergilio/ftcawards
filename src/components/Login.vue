@@ -59,7 +59,7 @@
           <v-container class="container-inputs">
             <v-col cols="12" md="12">
               <v-btn
-                :disabled=invalid
+                :disabled="invalid"
                 color="#68C3E2"
                 depressed
                 elevation="5"
@@ -107,6 +107,7 @@ export default {
       },
       password: "",
       userName: "",
+      serverDomain: window.location.host.includes('localhost') ? "http://localhost:3000" : "https://ftc-awards-server-mysql.herokuapp.com",
     };
   },
   components: {
@@ -116,27 +117,36 @@ export default {
     Loader,
   },
 
+  created() {
+      /* eslint-disable*/
+      console.log(this.serverDomain);
+    },
+
   methods: {
+    
+
     UserException(message, serverError) {
       this.message = message;
       this.name = "UserException";
       this.sqlError = serverError;
     },
-    login: function (userName, password) {
+
+    login: function(userName, password) {
       var requisicao = {
         userName: userName,
         password: password,
       };
       this.loader = true;
       /* eslint-disable*/
-      fetch("https://ftc-awards-server-mysql.herokuapp.com/users/login", {
+      fetch(`${this.serverDomain}/users/login`, {
         credentials: "include",
         method: "post",
         body: JSON.stringify(requisicao),
         headers: {
           "Content-Type": "application/json",
-           'Accept': 'application/json',
-          'Access-Control-Allow-Origin': 'https://ftc-awards-server-mysql.herokuapp.com'
+          Accept: "application/json",
+          "Access-Control-Allow-Origin":
+            "https://ftc-awards-server-mysql.herokuapp.com",
         },
       })
         .then((response) => {
@@ -161,5 +171,3 @@ export default {
   },
 };
 </script>
-
-

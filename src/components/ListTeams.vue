@@ -2,10 +2,7 @@
   <div>
     <v-dialog v-model="dialog" max-width="290">
       <v-card>
-        <v-img
-          v-if="this.times.length > 0"
-          :src="require('../assets/fotos_times/' + times[index].value + '.jpg')"
-        />
+        <v-img v-if="this.times.length > 0" :src="srcComputed" />
       </v-card>
     </v-dialog>
     <!--Dialog de Confirmação -->
@@ -52,13 +49,33 @@ export default {
       index: 0,
       dialog: false,
       loader: false,
+      serverDomain: window.location.host.includes("localhost")
+        ? "http://localhost:3000"
+        : "https://ftc-awards-server-mysql.herokuapp.com",
     };
+  },
+  computed: {
+    srcComputed() {
+      /* eslint-disable*/
+      let index = this.index;
+      try {
+        return require("../assets/fotos_times/" +
+          this.times[index].value +
+          ".jpg");
+      } catch {
+        return require("../assets/fotos_times/standard.png");
+      }
+    },
   },
   components: {
     Loader,
   },
   methods: {
-    changeIndex: function (newTeam) {
+    imageError: function() {
+      /* eslint-disable*/
+      console.log("image not working");
+    },
+    changeIndex: function(newTeam) {
       this.$store.commit("increment");
 
       for (let k = 0; k < this.times.length; k++) {
@@ -69,7 +86,7 @@ export default {
 
   created() {
     this.loader = true;
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/teams", {
+    fetch(`${this.serverDomain}/teams`, {
       credentials: "include",
     })
       .then((response) => response.json())

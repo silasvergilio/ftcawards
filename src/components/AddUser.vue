@@ -165,6 +165,7 @@ export default {
       permission: "",
       possiblePermissions: ["Administrador", "Juiz de Sala"],
       name: "",
+      serverDomain: window.location.host.includes('localhost') ? "http://localhost:3000" : "https://ftc-awards-server-mysql.herokuapp.com",      
     };
   },
   components: {
@@ -196,7 +197,7 @@ export default {
 
       // this.$refs.observer.validate();
 
-      fetch("https://ftc-awards-server-mysql.herokuapp.com/users", {
+      fetch(`${this.serverDomain}/users`, {
         method: "post",
         body: JSON.stringify(requisicao),
         headers: {

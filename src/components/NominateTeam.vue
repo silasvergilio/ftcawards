@@ -80,7 +80,9 @@ export default {
       times: [],
       timesNome: [],
       loader: false,
-
+      serverDomain: window.location.host.includes("localhost")
+        ? "http://localhost:3000"
+        : "https://ftc-awards-server-mysql.herokuapp.com",
       premios: [
         { text: "Pensamento Criativo", value: 1 },
         { text: "Conexão", value: 2 },
@@ -90,7 +92,13 @@ export default {
         { text: "Controle", value: 6 },
         { text: "Inspiração", value: 7 },
       ],
-      salas: [{ text: "A" }, { text: "B" }, { text: "C" }, { text: "D" }, { text: "E"}],
+      salas: [
+        { text: "A" },
+        { text: "B" },
+        { text: "C" },
+        { text: "D" },
+        { text: "E" },
+      ],
 
       message: "",
       team: "",
@@ -99,7 +107,7 @@ export default {
       check() {
         if (!this.team || !this.award) alert("Complete a indicação");
       },
-      indicaTime: function () {
+      indicaTime: function() {
         this.loader = true;
         var requisicao = {
           text: this.team.text,
@@ -113,31 +121,25 @@ export default {
 
         switch (this.award.value) {
           case 1:
-            url =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/pensamentocriativo";
+            url = `${this.serverDomain}/awards/PensamentoCriativo`;
             break;
           case 2:
-            url =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/conexao";
+            url = `${this.serverDomain}/awards/Conexao`;
             break;
           case 3:
-            url =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/inovacao";
+            url = `${this.serverDomain}/awards/Inovacao`;
             break;
           case 4:
-            url = "https://ftc-awards-server-mysql.herokuapp.com/awards/design";
+            url = `${this.serverDomain}/awards/Design`;
             break;
           case 5:
-            url =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/motivacao";
+            url = `${this.serverDomain}/awards/Motivacao`;
             break;
           case 6:
-            url =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/controle";
+            url = `${this.serverDomain}/awards/Controle`;
             break;
           case 7:
-            url =
-              "https://ftc-awards-server-mysql.herokuapp.com/awards/inspire";
+            url = `${this.serverDomain}/awards/Inspire`;
             break;
         }
         fetch(url, {
@@ -187,7 +189,7 @@ export default {
   },
   created() {
     this.loader = true;
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/teams", {
+    fetch(`${this.serverDomain}/teams`, {
       credentials: "include",
     })
       .then((response) => response.json())
