@@ -20,8 +20,8 @@
           </v-card-title>
 
           <v-img
-            v-if="items[awardIndex].teams[index].imageLoad"
-            :src="srcComputed"
+            v-if="items[awardIndex].teams[index].imageLink"
+            :src="items[awardIndex].teams[index].imageLink"
           />
 
           <v-card-text v-if="items[0].teams[0]">
@@ -131,9 +131,9 @@
 
                         <b> {{ team.value }} - {{ team.text }} </b>
 
-                        <v-icon>
+                        <v-icon v-if="team.sala">
                           mdi-alpha-{{
-                            team.sala.toLowerCase()
+                           team.sala.toLowerCase()
                           }}-circle-outline</v-icon
                         >
                       </v-list-item-title>
@@ -349,7 +349,7 @@ export default {
       var uri = "";
 
       switch (this.items[awardIndex].name) {
-       case "Pensamento Criativo":
+        case "Pensamento Criativo":
           uri = `${this.serverDomain}/awards/PensamentoCriativo`;
           break;
         case "Conexão":
@@ -407,25 +407,25 @@ export default {
 
         switch (this.items[this.awardIndex].name) {
           case "Pensamento Criativo":
-          uri = `${this.serverDomain}/awards/PensamentoCriativo`;
-          break;
-        case "Conexão":
-          uri = `${this.serverDomain}/awards/Conexao`;
-          break;
-        case "Inovação":
-          uri = `${this.serverDomain}/awards/Inovacao`;
-          break;
-        case "Motivação":
-          uri = `${this.serverDomain}/awards/Motivacao`;
-          break;
-        case "Design":
-          uri = `${this.serverDomain}/awards/Design`;
-          break;
-        case "Controle":
-          uri = `${this.serverDomain}/awards/Controle`;
-          break;
-        case "Inspiração":
-          uri = `${this.serverDomain}/awards/Inspire`;
+            uri = `${this.serverDomain}/awards/PensamentoCriativo`;
+            break;
+          case "Conexão":
+            uri = `${this.serverDomain}/awards/Conexao`;
+            break;
+          case "Inovação":
+            uri = `${this.serverDomain}/awards/Inovacao`;
+            break;
+          case "Motivação":
+            uri = `${this.serverDomain}/awards/Motivacao`;
+            break;
+          case "Design":
+            uri = `${this.serverDomain}/awards/Design`;
+            break;
+          case "Controle":
+            uri = `${this.serverDomain}/awards/Controle`;
+            break;
+          case "Inspiração":
+            uri = `${this.serverDomain}/awards/Inspire`;
             break;
           default:
             break;
@@ -447,14 +447,12 @@ export default {
   },
   created() {
     this.loader = true;
-    fetch(
-     `${this.serverDomain}/awards/PensamentoCriativo`
-    )
+    fetch(`${this.serverDomain}/awards/PensamentoCriativo`)
       .then((response) => response.json())
       .then((json) => {
         /* eslint-disable*/
         this.awardReqCount++;
-        if (this.awardReqCount == 6) this.loader = false;
+        if (this.awardReqCount >= 6) this.loader = false;
         this.items[0].teams = json;
         this.items[0].teams.sort(function(a, b) {
           return a.position - b.position;
@@ -462,13 +460,18 @@ export default {
         this.items[0].teams.forEach((element) => {
           element.imageLoad = true;
         });
+        fetch(`${this.serverDomain}/awards/non-nominated/teams`)
+          .then((response) => response.json())
+          .then((json) => {
+            console.log(json);
+          });
       });
 
     fetch(`${this.serverDomain}/awards/Conexao`)
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
-        if (this.awardReqCount == 6) this.loader = false;
+        if (this.awardReqCount >= 6) this.loader = false;
 
         this.items[1].teams = json;
         this.items[1].teams.sort(function(a, b) {
@@ -483,7 +486,7 @@ export default {
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
-        if (this.awardReqCount == 6) this.loader = false;
+        if (this.awardReqCount >= 6) this.loader = false;
 
         this.items[2].teams = json;
 
@@ -499,7 +502,7 @@ export default {
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
-        if (this.awardReqCount == 6) this.loader = false;
+        if (this.awardReqCount >= 6) this.loader = false;
 
         this.items[3].teams = json;
         this.items[3].teams.sort(function(a, b) {
@@ -514,7 +517,7 @@ export default {
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
-        if (this.awardReqCount == 6) this.loader = false;
+        if (this.awardReqCount >= 6) this.loader = false;
 
         this.items[4].teams = json;
         this.items[4].teams.sort(function(a, b) {
@@ -529,7 +532,7 @@ export default {
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
-        if (this.awardReqCount == 6) this.loader = false;
+        if (this.awardReqCount >= 6) this.loader = false;
 
         this.items[5].teams = json;
         this.items[5].teams.sort(function(a, b) {
@@ -539,12 +542,11 @@ export default {
           element.imageLoad = true;
         });
       });
-    fetch(`${this.serverDomain}/awards/Inspire`)
+    fetch(`${this.serverDomain}/awards/list/inspire`)
       .then((response) => response.json())
       .then((json) => {
         this.awardReqCount++;
-        if (this.awardReqCount == 7) this.loader = false;
-
+        if (this.awardReqCount >= 6) this.loader = false;
         this.items[6].teams = json;
         this.items[6].teams.sort(function(a, b) {
           return a.position - b.position;

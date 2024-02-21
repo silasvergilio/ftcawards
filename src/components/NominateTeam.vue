@@ -46,6 +46,19 @@
       </v-row>
 
       <v-row>
+        <v-col cols="12" md="12">
+          <v-container fluid>
+            <v-file-input
+              @change="onFileChange"
+              prepend-icon="mdi-camera"
+              accept="image/*"
+              label="Anexar imagem"
+            ></v-file-input>
+          </v-container>
+        </v-col>
+      </v-row>
+
+      <v-row>
         <v-col cols="12" md="4">
           <v-btn
             @click="indicaTime()"
@@ -66,6 +79,7 @@
 <script>
 import CardTitlePage from "./CardTitlePage";
 import Loader from "./Loader.vue";
+import axios from "axios";
 
 export default {
   methods: {
@@ -73,6 +87,80 @@ export default {
       this.message = message;
       this.name = "AwardException";
       this.sqlError = serverError;
+    },
+    onFileChange(e) {
+      /* eslint-disable*/
+      this.myFileObject = e;
+    },
+    indicaTime: function() {
+      /* eslint-disable*/
+      const formData = new FormData();
+      formData.append("file", this.myFileObject);
+      console.log(this.myFileObject);
+      this.loader = true;
+      var requisicao = {
+        value: this.team.value,
+        text: this.team.text,
+        motive: this.message,
+        premiado: false,
+        sala: this.room.text,
+        position: 0,
+      };
+      formData.append("bodyReq", JSON.stringify(requisicao));
+
+      // window.alert(JSON.stringify(requisicao));
+      var url;
+
+      switch (this.award.value) {
+        case 1:
+          url = `${this.serverDomain}/awards/PensamentoCriativo`;
+          break;
+        case 2:
+          url = `${this.serverDomain}/awards/Conexao`;
+          break;
+        case 3:
+          url = `${this.serverDomain}/awards/Inovacao`;
+          break;
+        case 4:
+          url = `${this.serverDomain}/awards/Design`;
+          break;
+        case 5:
+          url = `${this.serverDomain}/awards/Motivacao`;
+          break;
+        case 6:
+          url = `${this.serverDomain}/awards/Controle`;
+          break;
+        case 7:
+          url = `${this.serverDomain}/awards/Inspire`;
+          break;
+      }
+
+      axios
+        .post(url, formData)
+        .then((res) => {
+          /* eslint-disable*/
+          this.loader = false;
+          return response.json();
+        })
+        .then((response) => {
+          /* eslint-disable*/
+          if (response.SqlError) {
+            if (response.SqlError.errno == 1010) {
+              throw new this.AwardException(
+                "Equipe Já indicada",
+                response.SqlError
+              );
+            }
+          }
+        })
+        .catch(() => {
+          /* eslint-disable*/
+          //this.dialog = true;
+          // this.dialogMessage.title = "Erro";
+          // this.dialogMessage.message = err.message;
+        });
+
+      this.$refs.form.reset();
     },
   },
   data() {
@@ -104,79 +192,15 @@ export default {
       team: "",
       award: "",
       room: "",
-      check() {
-        if (!this.team || !this.award) alert("Complete a indicação");
-      },
-      indicaTime: function() {
-        this.loader = true;
-        var requisicao = {
-          text: this.team.text,
-          motive: this.message,
-          premiado: false,
-          sala: this.room.text,
-          position: 0,
-        };
-        // window.alert(JSON.stringify(requisicao));
-        var url;
-
-        switch (this.award.value) {
-          case 1:
-            url = `${this.serverDomain}/awards/PensamentoCriativo`;
-            break;
-          case 2:
-            url = `${this.serverDomain}/awards/Conexao`;
-            break;
-          case 3:
-            url = `${this.serverDomain}/awards/Inovacao`;
-            break;
-          case 4:
-            url = `${this.serverDomain}/awards/Design`;
-            break;
-          case 5:
-            url = `${this.serverDomain}/awards/Motivacao`;
-            break;
-          case 6:
-            url = `${this.serverDomain}/awards/Controle`;
-            break;
-          case 7:
-            url = `${this.serverDomain}/awards/Inspire`;
-            break;
-        }
-        fetch(url, {
-          credentials: "include",
-          method: "post",
-          body: JSON.stringify(requisicao),
-          headers: {
-            "Content-Type": "application/json",
-          },
-        })
-          .then((response) => {
-            /* eslint-disable*/
-            this.loader = false;
-            return response.json();
-          })
-          .then((response) => {
-            /* eslint-disable*/
-            if (response.SqlError) {
-              if (response.SqlError.errno == 1010) {
-                throw new this.AwardException(
-                  "Equipe Já indicada",
-                  response.SqlError
-                );
-              }
-            }
-          })
-          .catch(() => {
-            /* eslint-disable*/
-            //this.dialog = true;
-            // this.dialogMessage.title = "Erro";
-            // this.dialogMessage.message = err.message;
-          });
-
-        this.$refs.form.reset();
-      },
+      selectedImage: "",
+      myFileObject: "",
     };
   },
+
+  check() {
+    if (!this.team || !this.award) alert("Complete a indicação");
+  },
+
   components: {
     CardTitlePage,
     Loader,

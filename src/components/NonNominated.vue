@@ -9,6 +9,14 @@
 
     <Loader v-bind:overlay="loader"> </Loader>
 
+    <CardTitlePage
+    class="card-title"
+      titulo="Times não nomeados"
+      icon="mdi-clipboard"
+      body="Estes são times que não foram nomeados a nenhum prêmio, mas recomenda-se que sejam visitados."
+    >
+    </CardTitlePage>
+
     <v-simple-table>
       <template v-slot:default>
         <thead>
@@ -16,7 +24,6 @@
             <th class="text-left">Nome</th>
             <th class="text-left">Número</th>
             <th class="text-left">Estado</th>
-           
           </tr>
         </thead>
         <tbody>
@@ -31,7 +38,6 @@
             <td>{{ item.text }}</td>
             <td>{{ item.value }}</td>
             <td>{{ item.state }}</td>
-           
           </tr>
         </tbody>
       </template>
@@ -39,7 +45,15 @@
   </div>
 </template>
 
+<style scoped>
+.card-title{
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+</style>
+
 <script>
+import CardTitlePage from "./CardTitlePage";
 import Loader from "./Loader.vue";
 
 export default {
@@ -69,6 +83,7 @@ export default {
   },
   components: {
     Loader,
+    CardTitlePage,
   },
   methods: {
     imageError: function() {
@@ -86,7 +101,7 @@ export default {
 
   created() {
     this.loader = true;
-    fetch(`${this.serverDomain}/teams`, {
+    fetch(`${this.serverDomain}/awards/non-nominated/teams`, {
       credentials: "include",
     })
       .then((response) => response.json())

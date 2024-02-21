@@ -11,7 +11,7 @@
 
       <v-row>
         <v-container>
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="12">
             <v-text-field
               prepend-icon="mdi-card-text-outline"
               label="Nome da Equipe"
@@ -19,7 +19,7 @@
             ></v-text-field>
           </v-col>
 
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="12">
             <v-text-field
               label="Número da Equipe"
               prepend-icon="mdi-pound-box-outline"
@@ -29,7 +29,7 @@
             ></v-text-field>
           </v-col>
 
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="12">
             <v-text-field
               label="Escola"
               prepend-icon="mdi-pound-box-outline"
@@ -37,7 +37,7 @@
             ></v-text-field>
           </v-col>
 
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="12">
             <v-combobox
               v-model="state"
               :items="estados"
@@ -45,7 +45,7 @@
             ></v-combobox>
           </v-col>
 
-          <v-col cols="12" md="4">
+          <v-col cols="12" md="12">
             <v-btn
               class="
                 white--text
@@ -140,7 +140,7 @@ export default {
       //  window.alert(JSON.stringify(requisicao));
       this.$refs.form.reset();
 
-      fetch(`${this.serverDomain}/teams/`, {
+      fetch(`${this.serverDomain}/teams?bulk=true`, {
         method: "post",
         body: JSON.stringify(requisicao),
         headers: {

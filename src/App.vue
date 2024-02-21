@@ -56,7 +56,7 @@
   </v-app>
 </template>
 
-<style  scoped>
+<style scoped>
 .user-title {
   margin-left: 50rem;
 }
@@ -88,7 +88,7 @@ export default {
         name: "Adicionar Usuário",
         icon: "mdi-account-multiple-plus",
         route: "/adduser",
-        permission: [""],
+        permission: ["Administrador"],
       },
       {
         name: "Adicionar Time",
@@ -96,7 +96,12 @@ export default {
         route: "/addTeam",
         permission: ["Administrador"],
       },
-
+      {
+        name: "Adicionar Times",
+        icon: "mdi-folder-check",
+        route: "/addTeams",
+        permission: ["Administrador", "Juiz de Sala"],
+      },
       {
         name: "Lista de Times",
         icon: "mdi-account-badge-horizontal-outline",
@@ -108,6 +113,12 @@ export default {
         name: "Indicar Times",
         icon: "mdi-file-tree",
         route: "/nominateTeam",
+        permission: ["Administrador", "Juiz de Sala"],
+      },
+      {
+        name: "Times não indicados",
+        icon: "mdi-clipboard",
+        route: "/non-nominated",
         permission: ["Administrador", "Juiz de Sala"],
       },
       {
@@ -126,7 +137,7 @@ export default {
       if (!this.$store.state.user) {
         if (this.menuItens.indexOf(this.menuItens[0] === -1))
           allowedMenuItems.push(this.menuItens[0]);
-          allowedMenuItems.push(this.menuItens[1]);
+        allowedMenuItems.push(this.menuItens[1]);
       }
       this.menuItens.forEach((menuItem) => {
         if (this.$store.state.user) {
