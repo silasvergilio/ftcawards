@@ -186,6 +186,7 @@ export default {
         { text: "C" },
         { text: "D" },
         { text: "E" },
+        { text: "F" },
       ],
 
       message: "",
