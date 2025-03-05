@@ -35,7 +35,7 @@ export default {
     return {
       serverDomain: window.location.host.includes("localhost")
         ? "http://localhost:3000"
-        : "https://ftc-awards-server-mysql.herokuapp.com",
+        : "https://ftc-awards-backend-c7eeb3398334.herokuapp.com",
     };
   },
   components: {

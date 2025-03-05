@@ -103,45 +103,45 @@ export default {
 
   created() {
 
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/teams")
+    fetch("https://ftc-awards-backend-c7eeb3398334.herokuapp.com/teams")
       .then((response) => response.json())
       .then((json) => {
         this.times = json;
       });
 
     fetch(
-      "https://ftc-awards-server-mysql.herokuapp.com/awards/PensamentoCriativo"
+      "https://https://ftc-awards-backend-c7eeb3398334.herokuapp.com/awards/PensamentoCriativo"
     )
       .then((response) => response.json())
       .then((json) => {
         this.items[0].teams = json;
       });
 
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/Conexao")
+    fetch("https://ftc-awards-backend-c7eeb3398334.herokuapp.com/awards/Conexao")
       .then((response) => response.json())
       .then((json) => {
         this.items[1].teams = json;
       });
 
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/Inovacao")
+    fetch("https://ftc-awards-backend-c7eeb3398334.herokuapp.com/awards/Inovacao")
       .then((response) => response.json())
       .then((json) => {
         this.items[2].teams = json;
       });
 
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/Design")
+    fetch("https://ftc-awards-backend-c7eeb3398334.herokuapp.com/awards/Design")
       .then((response) => response.json())
       .then((json) => {
         this.items[3].teams = json;
       });
 
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/Motivacao")
+    fetch("https://ftc-awards-backend-c7eeb3398334.herokuapp.com/awards/Motivacao")
       .then((response) => response.json())
       .then((json) => {
         this.items[4].teams = json;
       });
 
-    fetch("https://ftc-awards-server-mysql.herokuapp.com/awards/Controle")
+    fetch("https://ftc-awards-backend-c7eeb3398334.herokuapp.com/awards/Controle")
       .then((response) => response.json())
       .then((json) => {
         this.items[5].teams = json;

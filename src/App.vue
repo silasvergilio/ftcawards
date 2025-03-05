@@ -37,9 +37,9 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app color="#FFB600" dark>
+    <v-app-bar app color="#0083AE" dark>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
-      <v-toolbar-title>FTC - Center Stage</v-toolbar-title>
+      <v-toolbar-title>FTC - Into the Deep</v-toolbar-title>
 
       <v-spacer></v-spacer>
       <p v-if="this.$store.state.user" class="font-weight-bold">
@@ -50,8 +50,8 @@
     <v-content>
       <router-view></router-view>
     </v-content>
-    <v-footer color="#68C3E2" app>
-      <span class="white--text">&copy; 2024 Silas dos Santos Vergilio</span>
+    <v-footer color="#ABD8E7" app>
+      <span class="white--text">&copy; Silver Tech 2025</span>
     </v-footer>
   </v-app>
 </template>
