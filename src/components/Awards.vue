@@ -392,7 +392,7 @@ export default {
 
       if (intention) {
         for (let j = 0; j < this.items[this.awardIndex].teams.length; j++) {
-          if (this.items[this.awardIndex].teams[j].premiado) allowAward = true;
+          if (this.items[this.awardIndex].teams[j].premiado) allowAward = false;
         }
       }
 
@@ -407,25 +407,25 @@ export default {
 
         switch (this.items[this.awardIndex].name) {
           case "Pensamento Criativo":
-            uri = `${this.serverDomain}/awards/PensamentoCriativo`;
+            uri = `${this.serverDomain}/awards/PensamentoCriativo/award`;
             break;
           case "Conexão":
-            uri = `${this.serverDomain}/awards/Conexao`;
+            uri = `${this.serverDomain}/awards/Conexao/award`;
             break;
           case "Inovação":
-            uri = `${this.serverDomain}/awards/Inovacao`;
+            uri = `${this.serverDomain}/awards/Inovacao/award`;
             break;
           case "Motivação":
-            uri = `${this.serverDomain}/awards/Motivacao`;
+            uri = `${this.serverDomain}/awards/Motivacao/award`;
             break;
           case "Design":
-            uri = `${this.serverDomain}/awards/Design`;
+            uri = `${this.serverDomain}/awards/Design/award`;
             break;
           case "Controle":
-            uri = `${this.serverDomain}/awards/Controle`;
+            uri = `${this.serverDomain}/awards/Controle/award`;
             break;
           case "Inspiração":
-            uri = `${this.serverDomain}/awards/Inspire`;
+            uri = `${this.serverDomain}/awards/Inspire/award`;
             break;
           default:
             break;
